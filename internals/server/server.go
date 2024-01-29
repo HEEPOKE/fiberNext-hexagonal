@@ -3,7 +3,9 @@ package server
 import (
 	"log"
 
+	_ "github.com/HEEPOKE/fiber-hexagonal/internals/app/docs"
 	"github.com/gofiber/fiber/v3"
+	"github.com/gofiber/fiber/v3/middleware/cors"
 	"github.com/gofiber/fiber/v3/middleware/helmet"
 	"github.com/gofiber/fiber/v3/middleware/logger"
 	"github.com/gofiber/fiber/v3/middleware/recover"
@@ -21,6 +23,14 @@ func NewServer() *Server {
 		AppName:       "App v1.0",
 	})
 
+	// cfg := swagger.Config{
+	// 	BasePath: "/apis",
+	// 	FilePath: "./internals/app/docs/swagger.json",
+	// 	Path:     "apis/docs",
+	// 	Title:    "API Docs",
+	// }
+
+	app.Use(cors.New())
 	app.Use(helmet.New())
 	app.Use(recover.New())
 	app.Use(logger.New(logger.Config{
@@ -28,6 +38,7 @@ func NewServer() *Server {
 		TimeFormat: "02-Jan-2006",
 		TimeZone:   "Asia/Bangkok",
 	}))
+	// app.Use(swagger.New(cfg))
 
 	return &Server{
 		fib: app,

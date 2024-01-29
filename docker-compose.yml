@@ -5,19 +5,19 @@ services:
     image: postgres:latest
     ports:
       - ${DB_PORT}:${DB_PORT}
-    env_file:
-      - .env
     environment:
       - POSTGRES_USER=${DB_USERNAME}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_DB=${DB_NAME}
+    env_file:
+      - .env
     networks:
       - Heepoke
   api:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: echo-api
+    container_name: fiber-api
     volumes:
       - .:/app
     working_dir: /app

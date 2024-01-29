@@ -12,12 +12,14 @@ var (
 )
 
 type Config struct {
+	PORT       string
 	DBHost     string
 	DBUserName string
 	DBPassword string
 	DBName     string
 	DBPort     string
-	PORT       string
+	DBssl      string
+	DBTimezone string
 }
 
 func LoadConfig() (*Config, error) {
@@ -28,12 +30,14 @@ func LoadConfig() (*Config, error) {
 	}
 
 	config := &Config{
-		DBHost:     os.Getenv("DB_HOST"),
-		DBUserName: os.Getenv("DB_USERName"),
-		DBPassword: os.Getenv("DB_PASSWORD"),
-		DBName:     os.Getenv("DB_NAME"),
-		DBPort:     os.Getenv("DB_PORT"),
 		PORT:       os.Getenv("PORT"),
+		DBHost:     os.Getenv("DB_HOST"),
+		DBUserName: os.Getenv("DB_USERNAME"),
+		DBPassword: os.Getenv("DB_PASSWORD"),
+		DBPort:     os.Getenv("DB_PORT"),
+		DBName:     os.Getenv("DB_NAME"),
+		DBssl:      os.Getenv("DB_SSL"),
+		DBTimezone: os.Getenv("DB_TIMEZONE"),
 	}
 
 	Cfg = config

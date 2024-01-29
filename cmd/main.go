@@ -1,13 +1,20 @@
 package main
 
-import "github.com/gofiber/fiber/v3"
+import (
+	"fmt"
+	"log"
+
+	"github.com/HEEPOKE/fiber-hexagonal/internals/server"
+	"github.com/HEEPOKE/fiber-hexagonal/pkg/configs"
+)
 
 func main() {
-	app := fiber.New()
+	_, err := configs.LoadConfig()
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	app.Get("/", func(c fiber.Ctx) error {
-		return c.SendString("Hello, World")
-	})
-
-	app.Listen(":6476")
+	address := fmt.Sprintf(":%s", configs.Cfg.PORT)
+	route := server.NewServer()
+	route.Init(address)
 }

@@ -3,7 +3,7 @@
 ## config environment
 
 ```bash
-cp .env,example .env
+cp .env.example .env
 ```
 
 ## Build Docker
